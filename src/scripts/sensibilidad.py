@@ -1,3 +1,6 @@
+#Integrantes: Elias Gonzalez Daniel Navarrete
+
+
 #Respondiendo la pregunta 5, se puede observar que la elección del intervalo y de la estimación inicial
 # tiene un impacto significativo en el número de iteraciones necesarias para que los métodos converjan a la raíz.
 # En general, elegir un intervalo más cercano a la raíz o una estimación inicial más precisa tiende a reducir

@@ -1,3 +1,5 @@
+#Integrantes: Elias Gonzalez Daniel Navarrete
+
 import numpy as np
 
 FUNCIONES = [

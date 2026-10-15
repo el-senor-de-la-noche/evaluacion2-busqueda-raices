@@ -1,3 +1,5 @@
+#Integrantes: Elias Gonzalez Daniel Navarrete
+
 #Generaremos un CSV con los valores de x y f(x) para cada función, un resumen de convergencia 
 # de los métodos numéricos, un ambiente controlado para las funciones y todos los gráficos necesarios para el análisis.
 import csv

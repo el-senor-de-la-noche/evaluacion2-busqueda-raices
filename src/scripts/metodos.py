@@ -1,7 +1,4 @@
-#Integrantes: Elias Gonzalez
-#             Daniel Navarrete
-#Ramo: Computacion Numerica
-#Profesor: Juan Cabezas
+#Integrantes: Elias Gonzalez Daniel Navarrete
 
 
 import numpy as np

@@ -1,3 +1,4 @@
+#Integrantes: Elias Gonzalez Daniel Navarrete
 
 import csv
 from pathlib import Path
