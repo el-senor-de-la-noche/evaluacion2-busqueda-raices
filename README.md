@@ -65,17 +65,3 @@ python sensibilidad.py
 - **`orden_convergenci.py`:** estima el orden de convergencia a partir de las aproximaciones obtenidas y genera un archivo CSV con los resultados.
 - **`sensibilidad.py`:** compara el comportamiento de los métodos al modificar los intervalos y las estimaciones iniciales.
 
-## Archivos generados
-
-**`src/data/`**
-- `<función>.csv`: columnas `x, f(x)` de cada función (6 archivos).
-- `resumen_convergencia.csv`: iteraciones, raíz, error y si convergió, por método y función.
-- `ambiente_controlado.csv`: intervalo, x₀, x₁, tolerancia, tope de iteraciones y demostración de la raíz (Bolzano o tangencia).
-- `historial_iteraciones.csv`: valor de x y error en cada iteración.
-- `orden_convergencia.csv`: orden de convergencia estimado.
-- `sensibilidad.csv`: iteraciones al variar intervalos y estimaciones iniciales.
-
-**`src/assets/`**
-- `funcion_<función>.png`: la función con su raíz marcada (y respaldo de Bolzano o tangencia).
-- `convergencia_<función>.png`: |error| vs iteración en escala log, comparando métodos.
-- `resumen_iteraciones.png`: iteraciones por método y función.
