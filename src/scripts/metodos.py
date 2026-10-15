@@ -6,12 +6,15 @@ import numpy as np
 TOL = 1e-6
 MAX_ITER = 100
 
+# Revisamos que el valor no sea demasiado grande ni inválido
 def _ok(x):
     return bool(np.isfinite(x)) and bool(np.abs(x) < 1e12)
 
 def _parar(fx, paso, tol):
     return bool(np.abs(fx) < tol or (paso is not None and np.abs(paso) < tol ))
 
+
+# Dividimos el intervalo por la mitad hasta que nos acerquemos a la raíz
 def biseccion(f, a, b, tol = TOL, max_iter = MAX_ITER):
     fa, fb = f(a), f(b)
     if fa*fb > 0:
@@ -30,6 +33,8 @@ def biseccion(f, a, b, tol = TOL, max_iter = MAX_ITER):
         c_prev = c
     return xs, False, "tope de iteraciones"
 
+
+# Usamos los extremos del intervalo para acercarnos a la raíz
 def falsa_posicion(f, a, b, tol = TOL, max_iter = MAX_ITER):
     fa, fb = f(a), f(b)
     if fa * fb > 0:
@@ -48,6 +53,8 @@ def falsa_posicion(f, a, b, tol = TOL, max_iter = MAX_ITER):
         c_prev = c
     return xs, False, "tope de iteraciones"
 
+
+# Repetimos el cálculo usando el resultado anterior como nuevo punto de partida
 def punto_fijo(g, x0, f=None, tol=TOL, max_iter=MAX_ITER):
     xs, x = [], x0
     for _ in range(max_iter):
@@ -60,6 +67,8 @@ def punto_fijo(g, x0, f=None, tol=TOL, max_iter=MAX_ITER):
         x = xn
     return xs, False, "tope de iteraciones"
 
+
+# Utilizamos los dos puntos anteriores para calcular una nueva aproximación
 def secante(f, x0, x1, tol=TOL, max_iter=MAX_ITER):
     xs = []
     for _ in range(max_iter):
@@ -75,6 +84,8 @@ def secante(f, x0, x1, tol=TOL, max_iter=MAX_ITER):
         x0, x1 = x1, x2
     return xs, False, "tope de iteraciones"
 
+
+# Usamos la derivada para calcular una aproximación más cercana a la raíz
 def newton(f, df, x0, tol=TOL, max_iter=MAX_ITER):
     xs, x = [], x0
     for _ in range(max_iter):
@@ -90,6 +101,8 @@ def newton(f, df, x0, tol=TOL, max_iter=MAX_ITER):
         x = xn
     return xs, False, "tope de iteraciones"
 
+
+# Aplicamos una versión de Newton que también utiliza la segunda derivada
 def newton_mejorado(f, df, d2f, x0, tol=TOL, max_iter=MAX_ITER):
     xs, x = [], x0
     if np.abs(f(x)) < tol:

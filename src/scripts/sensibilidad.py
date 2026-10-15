@@ -12,7 +12,9 @@ import numpy as np
 import metodos as m
 from funciones import FUNCIONES
 
+# Buscamos la carpeta donde se guardarán los resultados
 DATA = Path(__file__).resolve().parents[1] / "data"
+ 
 INTERVALOS = {
     "polinomica": [(1, 2), (0, 3), (-5, 5)],
     "logaritmica": [(2, 3), (1, 10), (0.5, 100)],
@@ -21,7 +23,7 @@ INTERVALOS = {
     "mixta": [(0.1, 1), (0.01, 3), (0.001, 10)],
 }
 
-#esta variable contiene los valores iniciales x0 que se utilizarán para cada función en los métodos iterativos.
+# Esta variable contiene los valores iniciales x0 que seran utilizados para cada función en los métodos iterativos
 X0S = {
     "polinomica": [1.5, 0.5, 5, -3],
     "logaritmica": [2.5, 0.5, 10, 50],
@@ -36,7 +38,7 @@ def its(r):
     xs, ok, _ = r
     return len(xs) if ok else "no converge"
 
-
+# Aquí vamos guardando los resultados de las pruebas
 filas = []
 with np.errstate(all="ignore"):
     for fn in FUNCIONES:
@@ -53,6 +55,7 @@ with np.errstate(all="ignore"):
             filas.append([k, "Newton-Raphson", f"x0={x0}", its(m.newton(fn["f"], fn["df"], x0))])
             filas.append([k, "Newton mejorado", f"x0={x0}", its(m.newton_mejorado(fn["f"], fn["df"], fn["d2f"], x0))])
 
+# Guardamos los resultados en un archivo CSV
 with open(DATA / "sensibilidad.csv", "w", newline="", encoding="utf-8") as fh:
     w = csv.writer(fh)
     w.writerow(["funcion", "metodo", "intervalo_o_x0", "iteraciones"])

@@ -6,9 +6,11 @@ import numpy as np
 import metodos as m
 from funciones import FUNCIONES
 
+# Buscamos la carpeta donde se guardan los resultados
 DATA = Path(__file__).resolve().parents[1] / "data"
 
 
+# Calculamos una aproximación del orden de convergencia.
 def orden(xs):
     d = np.abs(np.diff(np.array(xs, dtype=float)))
     d = d[np.isfinite(d) & (d > 1e-14)]
@@ -18,7 +20,7 @@ def orden(xs):
             ps.append(np.log(d[k + 1] / d[k]) / np.log(d[k] / d[k - 1]))
     return float(np.median(ps)) if ps else float("nan")
 
-
+# Se guardan los resultados de cada función y método
 filas = []
 with np.errstate(all="ignore"):
     for fn in FUNCIONES:
@@ -34,9 +36,10 @@ with np.errstate(all="ignore"):
         for nombre, (xs, _, _) in corridas.items():
             filas.append([fn["clave"], nombre, orden(xs)])
 
+# Creamos un CSV con los órdenes calculados
 with open(DATA / "orden_convergencia.csv", "w", newline="", encoding="utf-8") as fh:
     w = csv.writer(fh)
     w.writerow(["funcion", "metodo", "orden_estimado"])
     w.writerows(filas)
 for f_ in filas:
-    print(f"{f_[0]:15s} {f_[1]:16s} p ≈ {f_[2]:.2f}")
+    print(f"{f_[0]:15s} {f_[1]:16s} p ≈ {f_[2]:.2f}") # Mostramos los resultados en pantalla

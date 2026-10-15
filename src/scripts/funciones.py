@@ -33,9 +33,9 @@ FUNCIONES = [
 
 
 def raiz_referencia(fn):
-    # aqui nosotros calculamos la raíz de referencia usando el método de bisección, que es confiable 
+    # aqui nosotros calculamos la raíz de referencia usando el método de bisección, que nos sirve 
     # para encontrar raíces en un intervalo donde la función cambia de signo. Si la función tiene una raíz doble,
-    # simplemente devolvemos la raíz conocida.
+    # simplemente devolvemos la raíz conocida
     if "raiz" in fn:
         return fn["raiz"]
     a, b = fn["ab"]
