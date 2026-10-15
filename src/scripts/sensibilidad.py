@@ -1,11 +1,11 @@
 #Integrantes: Elias Gonzalez Daniel Navarrete
 
 
-#Respondiendo la pregunta 5, se puede observar que la elección del intervalo y de la estimación inicial
-# tiene un impacto significativo en el número de iteraciones necesarias para que los métodos converjan a la raíz.
-# En general, elegir un intervalo más cercano a la raíz o una estimación inicial más precisa tiende a reducir
-# el número de iteraciones requeridas. Por otro lado, intervalos más amplios o estimaciones iniciales más alejadas
-# de la raíz pueden aumentar el número de iteraciones o incluso llevar a la no convergencia del método.
+# Análisis de sensibilidad
+# Se evalúa cómo influyen los intervalos iniciales y las estimaciones iniciales
+# en la convergencia de los métodos numéricos, comparando la cantidad de
+# iteraciones y los casos en que los métodos convergen o no convergen
+
 import csv
 from pathlib import Path
 import numpy as np
