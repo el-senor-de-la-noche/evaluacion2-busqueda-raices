@@ -29,6 +29,35 @@ evaluacion2-busqueda-raices/
     └── scripts/          <- todos los scripts de Python
 ```
 
+## Entorno
+
+Requiere Python 3.9 o superior.
+
+**Linux / macOS**
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
+**Windows (PowerShell)**
+```powershell
+python -m venv venv
+venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+```
+
+## Ejecución
+
+Los scripts guardan sus resultados en `src/data/` y `src/assets/` (las crean si no existen). Ejecutar en este orden desde la carpeta `src/scripts`:
+
+```bash
+cd src/scripts
+python ejecutar_todo.py
+python orden_convergencia.py
+python sensibilidad.py
+```
+
 ## Descripción de los scripts
 
 - **`funciones.py`:** define las funciones de prueba, sus derivadas, las funciones de iteración y los valores iniciales utilizados.
@@ -36,11 +65,17 @@ evaluacion2-busqueda-raices/
 - **`orden_convergenci.py`:** estima el orden de convergencia a partir de las aproximaciones obtenidas y genera un archivo CSV con los resultados.
 - **`sensibilidad.py`:** compara el comportamiento de los métodos al modificar los intervalos y las estimaciones iniciales.
 
+## Archivos generados
 
-## Entorno (venv)
-Requiere Python 3.8 o superior 
+**`src/data/`**
+- `<función>.csv`: columnas `x, f(x)` de cada función (6 archivos).
+- `resumen_convergencia.csv`: iteraciones, raíz, error y si convergió, por método y función.
+- `ambiente_controlado.csv`: intervalo, x₀, x₁, tolerancia, tope de iteraciones y demostración de la raíz (Bolzano o tangencia).
+- `historial_iteraciones.csv`: valor de x y error en cada iteración.
+- `orden_convergencia.csv`: orden de convergencia estimado.
+- `sensibilidad.csv`: iteraciones al variar intervalos y estimaciones iniciales.
 
-## Cómo ejecutar
-
-
-## Qué hace cada script 
+**`src/assets/`**
+- `funcion_<función>.png`: la función con su raíz marcada (y respaldo de Bolzano o tangencia).
+- `convergencia_<función>.png`: |error| vs iteración en escala log, comparando métodos.
+- `resumen_iteraciones.png`: iteraciones por método y función.
