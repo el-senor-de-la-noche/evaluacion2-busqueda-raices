@@ -1,1 +1,6 @@
-Requerimientos que se solicitan
+# Evaluación 2 — La raíz que se esconde 
+# Dependencias del proyecto. Instalar con:
+#     pip install -r requirements.txt
+
+numpy>=1.24        # cálculo numérico
+matplotlib>=3.7    # gráficos 
