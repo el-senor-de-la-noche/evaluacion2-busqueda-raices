@@ -22,52 +22,7 @@ Newton mejorado. Este último es el Newton para raíces múltiples:
 función que tiene una raíz *simple* aunque `f` tenga una doble.
 
 
-
-
-
-
-## 3. Métodos numéricos
-
-### 3.1. Bisección
-
-Divide sucesivamente un intervalo que contiene una raíz en dos partes. En cada iteración conserva el subintervalo donde se mantiene el cambio de signo. Es un método robusto cuando se cumplen sus condiciones de aplicación, aunque su convergencia suele ser lenta.
-
-### 3.2. Falsa posición
-
-Utiliza una recta secante entre los extremos del intervalo para obtener una nueva aproximación. Conserva el intervalo con cambio de signo, pero puede estancarse si uno de los extremos permanece prácticamente fijo.
-
-### 3.3. Punto fijo
-
-Transforma la ecuación en una expresión de la forma \(x=g(x)\) y calcula aproximaciones sucesivas mediante \(x_{n+1}=g(x_n)\). Su convergencia depende de la función de iteración y del punto inicial.
-
-### 3.4. Secante
-
-Calcula nuevas aproximaciones utilizando dos puntos anteriores, sin requerir el cálculo explícito de la derivada. Puede converger rápidamente, pero también puede fallar dependiendo de los puntos iniciales.
-
-### 3.5. Newton-Raphson
-
-Utiliza la derivada de la función para calcular nuevas aproximaciones mediante:
-
-\[
-x_{n+1}=x_n-\frac{f(x_n)}{f'(x_n)}
-\]
-
-Puede presentar convergencia cuadrática cerca de una raíz simple si se cumplen las condiciones necesarias.
-
-### 3.6. Newton-Raphson mejorado
-
-El código implementa la iteración:
-
-\[
-x_{n+1}=x_n-
-\frac{f(x_n)f'(x_n)}
-{[f'(x_n)]^2-f(x_n)f''(x_n)}
-\]
-
-Este método utiliza la primera y segunda derivada. Su comportamiento debe evaluarse mediante los resultados obtenidos para cada función y las condiciones iniciales utilizadas.
-
-
-## 4. Resultados de convergencia
+## 3. Resultados de convergencia
 
 Iteraciones necesarias con tol = 1e-6 (`src/data/resumen_convergencia.csv`). `N/A` = el método no aplica; `Div.` = diverge.
 
@@ -99,9 +54,9 @@ Los guiones significan que no se pudo estimar: o el método no aplica, o converg
 
 
 
-## 5. Respuestas a las preguntas de convergencia
+## 4. Respuestas a las preguntas de convergencia
 
-### 5.1 ¿Qué método convergió en menos iteraciones en cada función? ¿Por qué?
+### 4.1 ¿Qué método convergió en menos iteraciones en cada función? ¿Por qué?
 
 - **Polinómica, exponencial y mixta:** Newton y Newton mejorado (2 iteraciones).
 - **Trigonométrica:** Newton y Newton mejorado (3).
@@ -115,7 +70,7 @@ Dos observaciones sobre los datos:
 - Falsa posición fue muy buena en las funciones casi lineales en el intervalo (4 iteraciones en la logarítmica y en la mixta), pero necesitó 12 en la polinómica, donde la curvatura es mayor.
 - Punto fijo depende de la función `g` elegida: tomó 4 iteraciones en la mixta pero 33 en la trigonométrica, porque la rapidez depende de cuánto vale |g′(raíz)| (más cercano a 1 es más lento).
 
-### 5.2 ¿Qué orden de convergencia tiene cada método y cómo se refleja en el gráfico |error| vs iteración?
+### 4.2 ¿Qué orden de convergencia tiene cada método y cómo se refleja en el gráfico |error| vs iteración?
 
 | Método | Orden medido | Teórico |
 |---|---|---|
@@ -134,12 +89,12 @@ En los gráficos `src/assets/convergencia_<clave>.png` (|error| en escala log) e
 ![Convergencia polinómica](src/assets/convergencia_polinomica.png)
 ![Convergencia trigonométrica](src/assets/convergencia_trigonometrica.png)
 
-### 5.3 ¿Qué métodos requieren un intervalo con cambio de signo y cuáles no?
+### 4.3 ¿Qué métodos requieren un intervalo con cambio de signo y cuáles no?
 
 - **Requieren cambio de signo:** bisección y falsa posición (métodos cerrados). Si f(a)·f(b) > 0 lanzan error. En la función de raíz doble, `(x−2)² ≥ 0`, no existe tal intervalo y ambos aparecen como **no aplica** en el resumen.
-- **No lo requieren:** punto fijo, secante, Newton y Newton mejorado (métodos abiertos). Solo necesitan estimaciones iniciales, pero a cambio no tienen garantía de convergencia (ver 3.5).
+- **No lo requieren:** punto fijo, secante, Newton y Newton mejorado (métodos abiertos). Solo necesitan estimaciones iniciales, pero a cambio no tienen garantía de convergencia (ver 4.5).
 
-### 5.4 Función que toca el eje x (raíz doble): ¿qué métodos fallan o no aplican y cuál se comporta mejor?
+### 4.4 Función que toca el eje x (raíz doble): ¿qué métodos fallan o no aplican y cuál se comporta mejor?
 
 Resultados para f(x) = (x − 2)² con x₀ = 1,2:
 
@@ -161,7 +116,7 @@ Por qué:
 
 ![Convergencia raíz doble](src/assets/convergencia_doble.png)
 
-### 5.5 ¿Cómo influyen el intervalo inicial y la estimación inicial en las iteraciones y en la convergencia?
+### 4.5 ¿Cómo influyen el intervalo inicial y la estimación inicial en las iteraciones y en la convergencia?
 
 Datos de `src/data/sensibilidad.csv`.
 
@@ -196,7 +151,7 @@ Datos de `src/data/sensibilidad.csv`.
 - Newton mejorado ayudó en algunos casos (trigonométrica x₀=−3: converge en 9 mientras Newton no; polinómica x₀=−3: 8 vs 30 iteraciones), pero falló donde Newton sí funcionaba (logarítmica x₀=0,5 y mixta x₀=0,05), porque en esos puntos la segunda derivada es grande y el paso lo saca del dominio de ln(x) o √x.
 - Punto fijo (con las `g` elegidas) convergió en todos los x₀ probados de las funciones con raíz simple, sin importar el punto de partida (entre 4 y 34 iteraciones), porque en esas `g` se cumple |g′| < 1 cerca de la raíz y la iteración es contractiva. Es más lento, pero más estable.
 
-### 5.6 ¿Qué método recomiendan según el tipo de función?
+### 4.6 ¿Qué método recomiendan según el tipo de función?
 
 | Situación | Método recomendado | Justificación con nuestros datos |
 |---|---|---|
@@ -210,12 +165,16 @@ Datos de `src/data/sensibilidad.csv`.
 La opción más sensata en la práctica es combinar: usar bisección para acotar la raíz y luego Newton o secante para refinar.
 
 
-## 6. Conclusión final
+## 5. Conclusión final
 
 **¿Qué método elegir para cada tipo de función y por qué (velocidad vs robustez)?**
+ En nuestras seis funciones, Newton y Newton mejorado fueron los más rápidos (2–3 iteraciones, orden cuadrático ≈ 2,00) y la secante quedó muy cerca (3–4 iteraciones, orden entre 1,68 y 1,99) sin necesitar la derivada. Bisección fue la más lenta (19–20 iteraciones, orden lineal) pero fue la única que nunca falló en ningún intervalo de la prueba de sensibilidad (hasta [−10, 10]). Es decir, los métodos abiertos ganan en velocidad y los cerrados en seguridad, y la elección depende de si se conoce un buen punto de partida o un intervalo con cambio de signo.
 
 
 **¿Qué ocurrió en la raíz doble y qué dice sobre "tener raíz" frente a "cambiar de signo"?**
-
+La función (x−2)² tiene raíz en x = 2, pero nunca cambia de signo, y por eso bisección y falsa posición no aplican: el teorema de Bolzano da una condición suficiente para asegurar una raíz, no necesaria. Además, los métodos abiertos clásicos se degradan: Newton y secante pasan de convergencia cuadrática/superlineal a lineal (p ≈ 1,00), punto fijo diverge, y el criterio |f(x)| < tol engaña, pues se cumple con un error real cercano a 10⁻³. Solo Newton mejorado, que trata a la función como si tuviera raíz simple al usar f/f′, la resuelve en 1 iteración.
 
 **¿Cómo cambió el número de iteraciones al mover el intervalo o la estimación inicial?**
+Ensanchar el intervalo casi no afectó a bisección (20 → 24 iteraciones en la polinómica), pero sí a falsa posición (12 → 75), que además dejó de converger en la exponencial con [−10, 10]. En los métodos abiertos el efecto fue mayor: Newton pasó de 2 a 37 iteraciones al mover x₀ de 1,5 a 0,5 en la polinómica, y dejó de converger en la trigonométrica (x₀ = −3 y x₀ = 10) y en la mixta (x₀ = 10). La rapidez de Newton solo está garantizada cerca de la raíz; lejos de ella, depende fuertemente del punto de partida.
+
+En conclusión los números muestran, que no existe un método mejor en todos los casos; el más rápido (Newton) es el menos seguro, el más seguro (bisección) es el más lento, y la raíz doble es el caso donde la teoría clásica falla y hay que usar un método adaptado.
