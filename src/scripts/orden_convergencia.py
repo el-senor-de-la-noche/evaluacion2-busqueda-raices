@@ -1,3 +1,9 @@
+#Integrantes: Elias Gonzalez
+#             Daniel Navarrete
+#Ramo: Computacion Numerica
+#Profesor: Juan Cabezas
+
+
 
 import csv
 from pathlib import Path
