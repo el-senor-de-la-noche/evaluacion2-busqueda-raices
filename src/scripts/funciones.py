@@ -1,3 +1,8 @@
+#Integrantes: Elias Gonzalez
+#             Daniel Navarrete
+#Ramo: Computacion Numerica
+#Profesor: Juan Cabezas
+
 import numpy as np
 
 FUNCIONES = [
